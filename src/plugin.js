@@ -2,10 +2,10 @@ import { resolve, dirname, relative } from 'path';
 import { ResolverFactory, SyncNodeJsInputFileSystem } from 'enhanced-resolve';
 import { parse } from 'babylon';
 import template from 'lodash/template';
-import traverse from 'babel-traverse';
+import traverse from '@babel/traverse';
 import runWebPackSync from './runWebPackSync';
 import memoize from './memoize';
-import { StringLiteral } from 'babel-types';
+import { StringLiteral } from '@babel/types';
 import colors from 'colors/safe';
 
 const processWebPackResult = (webPackResult, { output: { publicPath = '' } = {} } = {}) => {
@@ -79,7 +79,7 @@ const getEnhancedResolver = memoize(
 );
 
 const localInteropRequire = (path) => {
-  require('babel-register');
+  require('@babel/register');
   const res = require(resolve(process.cwd(), path));
   if ('default' in res) {
     return res.default;
